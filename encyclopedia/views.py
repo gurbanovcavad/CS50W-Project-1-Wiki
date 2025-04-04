@@ -5,6 +5,7 @@ from django.contrib import messages
 from . import util
 from django import forms 
 import random
+import markdown2
 
 class entryForm(forms.Form):
     title = forms.CharField()
@@ -33,7 +34,8 @@ def open(request, title):
         response = render(request, 'encyclopedia/404.html')
         response.status_code = 404
         return response
-    context = {'name': title, 'content': x}
+    content = markdown2.markdown(x)
+    context = {'name': title, 'content': content}
     return render(request, 'encyclopedia/open.html', context)
 
 def create(request):

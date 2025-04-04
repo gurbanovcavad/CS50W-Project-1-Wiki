@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block body %}
-    <p style="font-size:28px; margin-top: 10px; margin-left: 20px;">{{content}}</p>
+    {{content|safe}}
     <div>
         <form action="{% url 'edit' name %}" method="post">
             {% csrf_token %}
