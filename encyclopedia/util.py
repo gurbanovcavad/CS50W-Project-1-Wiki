@@ -18,6 +18,7 @@ def save_entry(title, content):
 
 
 def get_entry(title):
+    print("function: " + title)
     try:
         f = default_storage.open(f"entries/{title}.md")
         return f.read().decode("utf-8")

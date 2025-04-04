@@ -1,0 +1,9 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    {{name|upper}}
+{% endblock %}
+
+{% block body %}
+    <p style="font-size:28px; margin-top: 10px; margin-left: 20px;">{{content}}</p>
+{% endblock %}

@@ -9,7 +9,11 @@
 
     <ul>
         {% for entry in entries %}
-            <li>{{ entry }}</li>
+            <div>
+                <a href="{% url 'open' entry %}">{{ entry }}</a>
+            </div>
+        {% empty %}
+            <div>No page found.</div>
         {% endfor %}
     </ul>
 
