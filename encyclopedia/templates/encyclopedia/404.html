@@ -5,5 +5,11 @@
 {% endblock %}
 
 {% block body %}
-    <h1>File does not exist.</h1>
+    {% if messages %}
+        {% for m in messages %}
+            <h2>{{m}}</h2>
+        {% endfor %}
+    {% else %}
+        <h2>Something went wrong.</h2>
+    {% endif %}
 {% endblock %}
