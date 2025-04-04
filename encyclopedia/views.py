@@ -4,6 +4,7 @@ from django.urls import reverse
 from django.contrib import messages
 from . import util
 from django import forms 
+import random
 
 class entryForm(forms.Form):
     title = forms.CharField()
@@ -59,3 +60,8 @@ def edit(request, title):
 def save(request):
     util.save_entry(request.POST['title'], request.POST.get('content'))
     return HttpResponseRedirect(reverse('open', args=[request.POST.get('title')]))
+
+def rand(request):
+    return HttpResponseRedirect(reverse('open', args=[random.choice(util.list_entries())]))
+    
+    
