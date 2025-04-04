@@ -3,6 +3,11 @@ from django.http import Http404, HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from django.contrib import messages
 from . import util
+from django import forms 
+
+class entryForm(forms.Form):
+    title = forms.CharField()
+    content = forms.CharField(widget=forms.Textarea(attrs={'style':"width:300px; height: 150px;"}))
 
 def index(request):
     arr = util.list_entries()
@@ -44,3 +49,13 @@ def create(request):
             util.save_entry(title, content)
             return HttpResponseRedirect(reverse('open', args=[title]))
     return render(request, 'encyclopedia/create.html')
+
+def edit(request, title):
+    content = util.get_entry(title)
+    form = entryForm({'title': title, 'content': content})
+    context = {'form': form}
+    return render(request, 'encyclopedia/edit.html', context)
+
+def save(request):
+    util.save_entry(request.POST['title'], request.POST.get('content'))
+    return HttpResponseRedirect(reverse('open', args=[request.POST.get('title')]))
